@@ -42,33 +42,33 @@ void kfree(void **p)
 	*p = NULL;
 }
 
-struct list {
+typedef struct list {
 	void *data;
 	bool is_data_alloc;
 	struct list *next;
-};
+}list_t;
 
-struct node {
+typedef struct node {
 	int id;
 	double *r;
-};
+}node_t;
 
-void add_list_item(void *data, struct list **head, bool is_data_alloc)
+void add_list_item(void *data, list_t **head, bool is_data_alloc)
 {
-	struct list *new_head = kcalloc(1, sizeof(struct list));
+	list_t *new_head = kcalloc(1, sizeof(list_t));
 	new_head->data = data;
 	new_head->is_data_alloc = is_data_alloc;
 	new_head->next = *head;
 	*head = new_head;
 }
 
-void free_node_data(struct node *node)
+void free_node_data(node_t *node)
 {
 	node->id = 0;
 	kfree(&node->r);
 }
 
-void free_list_item(struct list **l, void (*free_data)(void *data))
+void free_list_item(list_t **l, void (*free_data)(void *data))
 {
 	if (free_data != NULL)
 		free_data((*l)->data);
@@ -81,10 +81,10 @@ void free_list_item(struct list **l, void (*free_data)(void *data))
 	kfree(l);
 }
 
-void remove_list_item(struct list *prev_item, struct list **del_item,
+void remove_list_item(list_t *prev_item, list_t **del_item,
 		      void (*free_data)(void *data))
 {
-	struct list *tmp = NULL;
+	list_t *tmp = NULL;
 	/*
 	* Если удаляется вершина списка - переприсвоить её.
 	* Это же условие обрабатывает случай одного оставшегося узла.
@@ -100,7 +100,7 @@ void remove_list_item(struct list *prev_item, struct list **del_item,
 	}
 }
 
-struct list *lfind_double(struct list **prev, struct list *head, void *val)
+list_t *lfind_double(list_t **prev, list_t *head, void *val)
 {
 	*prev = NULL;
 	while (head != NULL) {
@@ -112,7 +112,7 @@ struct list *lfind_double(struct list **prev, struct list *head, void *val)
 	return NULL;
 }
 
-struct list *find_item_by_id(struct list **prev, struct list *head, void *id)
+list_t *find_item_by_id(list_t **prev, list_t *head, void *id)
 {
 	*prev = NULL;
 	while (head != NULL) {
@@ -124,12 +124,12 @@ struct list *find_item_by_id(struct list **prev, struct list *head, void *id)
 	return NULL;
 }
 
-int delete_list_item(struct list **head, void *find_data,
-	struct list *(*find)(struct list **, struct list *, void *), 
+int delete_list_item(list_t **head, void *find_data,
+	list_t *(*find)(list_t **, list_t *, void *),
 	void (*free_data)(void *data))
 {
-	struct list *del_item = NULL;
-	struct list *prev_item = NULL;
+	list_t *del_item = NULL;
+	list_t *prev_item = NULL;
 
 	del_item = find(&prev_item, *head, find_data);
 	if (del_item == NULL)
@@ -143,12 +143,12 @@ int delete_list_item(struct list **head, void *find_data,
 
 int main()
 {
-	struct list *dlist = NULL;
+	list_t *dlist = NULL;
 	
 	//double *a = kcalloc(1, sizeof(double));
 	//*a = 2.5;
 	//double a = 2.5;
-	struct node *node1 = kcalloc(1, sizeof(struct node));
+	node_t *node1 = kcalloc(1, sizeof(node_t));
 	node1->id = 1;
 	node1->r = kcalloc(2, sizeof(double));
 	node1->r[0] = 1.2; node1->r[1] = 1.5;
@@ -157,7 +157,7 @@ int main()
 	//double *b = kcalloc(1, sizeof(double));
 	//*b = 3.1;
 	//double b = 3.1;
-	struct node node2 = { .id = 2, .r = NULL };
+	node_t node2 = { .id = 2, .r = NULL };
 	node2.r = kcalloc(2, sizeof(double));
 	node2.r[0] = 2.3; node2.r[1] = 2.5;
 	add_list_item(&node2, &dlist, false);
