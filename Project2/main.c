@@ -79,7 +79,7 @@ void free_list_item(struct list **l, void (*free_data)(void *data))
 
 	(*l)->next = NULL;
 	kfree(l);
-};
+}
 
 void remove_list_item(struct list *prev_item, struct list **del_item,
 		      void (*free_data)(void *data))
