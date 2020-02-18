@@ -25,8 +25,7 @@ static void remove_list_item(list_t *prev_item, list_t **del_item,
 		tmp = (*del_item)->next;
 		free_list_item(del_item, free_data);
 		*del_item = tmp;
-	}
-	else {
+	} else {
 		/* "перекидываем" связь через удаляемый узел */
 		prev_item->next = (*del_item)->next;
 		free_list_item(del_item, free_data);
