@@ -51,7 +51,7 @@ int main()
 	node1->id = 1;
 	node1->r = kcalloc(2, sizeof(double));
 	node1->r[0] = 1.2; node1->r[1] = 1.5;
-	add_list_item(node1, &dlist, true);
+	push_list(node1, &dlist, true);
 
 	//double *b = kcalloc(1, sizeof(double));
 	//*b = 3.1;
@@ -59,7 +59,7 @@ int main()
 	struct node node2 = { .id = 2, .r = NULL };
 	node2.r = kcalloc(2, sizeof(double));
 	node2.r[0] = 2.3; node2.r[1] = 2.5;
-	add_list_item(&node2, &dlist, false);
+	push_list(&node2, &dlist, false);
 
 	//double c = 2.5;
 	int id = 1;

@@ -32,7 +32,7 @@ static void remove_list_item(struct list *prev_item, struct list **del_item,
 	}
 }
 
-void add_list_item(void *data, struct list **head, bool is_data_alloc)
+void push_list(void *data, struct list **head, bool is_data_alloc)
 {
 	struct list *new_head = kcalloc(1, sizeof(struct list));
 	new_head->data = data;
