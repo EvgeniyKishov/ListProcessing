@@ -5,16 +5,16 @@
 #include <stdlib.h>
 #include "mm.h"
 
-typedef struct list {
+struct list {
 	void *data;
 	bool is_data_alloc;
 	struct list *next;
-}list_t;
+};
 
-void add_list_item(void *data, list_t **head, bool is_data_alloc);
-int delete_list_item(list_t **head, void *find_data,
-		     list_t *(*find)(list_t **, list_t *, void *),
-		     void (*free_data)(void *data));
-void pop_list(list_t **head, void (*free_data)(void *data));
+void add_list_item(void *data, struct list **head, bool is_data_alloc);
+int delete_list_item(struct list **head, void *find_data,
+		struct list *(*find)(struct list **, struct list *, void *),
+		void (*free_data)(void *data));
+void pop_list(struct list **head, void (*free_data)(void *data));
 
 #endif 

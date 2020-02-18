@@ -1,6 +1,6 @@
 ﻿#include "list.h"
 
-static void free_list_item(list_t **l, void (*free_data)(void *data))
+static void free_list_item(struct list **l, void (*free_data)(void *data))
 {
 	if (free_data != NULL)
 		free_data((*l)->data);
@@ -13,10 +13,10 @@ static void free_list_item(list_t **l, void (*free_data)(void *data))
 	kfree(l);
 }
 
-static void remove_list_item(list_t *prev_item, list_t **del_item,
+static void remove_list_item(struct list *prev_item, struct list **del_item,
 	void (*free_data)(void *data))
 {
-	list_t *tmp = NULL;
+	struct list *tmp = NULL;
 	/*
 	* Если удаляется вершина списка - переприсвоить её.
 	* Это же условие обрабатывает случай одного оставшегося узла.
@@ -32,21 +32,21 @@ static void remove_list_item(list_t *prev_item, list_t **del_item,
 	}
 }
 
-void add_list_item(void *data, list_t **head, bool is_data_alloc)
+void add_list_item(void *data, struct list **head, bool is_data_alloc)
 {
-	list_t *new_head = kcalloc(1, sizeof(list_t));
+	struct list *new_head = kcalloc(1, sizeof(struct list));
 	new_head->data = data;
 	new_head->is_data_alloc = is_data_alloc;
 	new_head->next = *head;
 	*head = new_head;
 }
 
-int delete_list_item(list_t **head, void *find_data,
-		     list_t *(*find)(list_t **, list_t *, void *),
-		     void (*free_data)(void *data))
+int delete_list_item(struct list **head, void *find_data,
+		struct list *(*find)(struct list **, struct list *, void *),
+		void (*free_data)(void *data))
 {
-	list_t *del_item = NULL;
-	list_t *prev_item = NULL;
+	struct list *del_item = NULL;
+	struct list *prev_item = NULL;
 
 	del_item = find(&prev_item, *head, find_data);
 	if (del_item == NULL)
@@ -58,7 +58,7 @@ int delete_list_item(list_t **head, void *find_data,
 	return 0;
 }
 
-void pop_list(list_t **head, void (*free_data)(void *data))
+void pop_list(struct list **head, void (*free_data)(void *data))
 {
 	remove_list_item(NULL, head, free_data);
 }
