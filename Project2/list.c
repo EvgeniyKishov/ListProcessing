@@ -1,4 +1,4 @@
-#include "list.h"
+ï»¿#include "list.h"
 
 static void free_list_item(list_t **l, void (*free_data)(void *data))
 {
@@ -18,15 +18,15 @@ static void remove_list_item(list_t *prev_item, list_t **del_item,
 {
 	list_t *tmp = NULL;
 	/*
-	* Åñëè óäàëÿåòñÿ âåðøèíà ñïèñêà - ïåðåïðèñâîèòü å¸.
-	* Ýòî æå óñëîâèå îáðàáàòûâàåò ñëó÷àé îäíîãî îñòàâøåãîñÿ óçëà.
+	* Ð•ÑÐ»Ð¸ ÑƒÐ´Ð°Ð»ÑÐµÑ‚ÑÑ Ð²ÐµÑ€ÑˆÐ¸Ð½Ð° ÑÐ¿Ð¸ÑÐºÐ° - Ð¿ÐµÑ€ÐµÐ¿Ñ€Ð¸ÑÐ²Ð¾Ð¸Ñ‚ÑŒ ÐµÑ‘.
+	* Ð­Ñ‚Ð¾ Ð¶Ðµ ÑƒÑÐ»Ð¾Ð²Ð¸Ðµ Ð¾Ð±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÑ‚ ÑÐ»ÑƒÑ‡Ð°Ð¹ Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð¾ÑÑ‚Ð°Ð²ÑˆÐµÐ³Ð¾ÑÑ ÑƒÐ·Ð»Ð°.
 	*/
 	if (prev_item == NULL) {
 		tmp = (*del_item)->next;
 		free_list_item(del_item, free_data);
 		*del_item = tmp;
 	} else {
-		/* "ïåðåêèäûâàåì" ñâÿçü ÷åðåç óäàëÿåìûé óçåë */
+		/* "Ð¿ÐµÑ€ÐµÐºÐ¸Ð´Ñ‹Ð²Ð°ÐµÐ¼" ÑÐ²ÑÐ·ÑŒ Ñ‡ÐµÑ€ÐµÐ· ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ñ‹Ð¹ ÑƒÐ·ÐµÐ» */
 		prev_item->next = (*del_item)->next;
 		free_list_item(del_item, free_data);
 	}
