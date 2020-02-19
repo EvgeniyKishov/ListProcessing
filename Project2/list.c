@@ -34,7 +34,7 @@ static void remove_list_item(list_t *prev_item, list_t **del_item,
 
 void push_list(void *data, list_t **head, bool is_data_alloc)
 {
-	list_t *new_head = kcalloc(1, sizeof(struct list));
+	list_t *new_head = kcalloc(1, sizeof(list_t));
 	new_head->data = data;
 	new_head->is_data_alloc = is_data_alloc;
 	new_head->next = *head;
@@ -61,4 +61,11 @@ int delete_list_item(list_t **head, void *find_data,
 void pop_list(list_t **head, void (*free_data)(void *data))
 {
 	remove_list_item(NULL, head, free_data);
+}
+
+void delete_list(list_t **head, void (*free_data)(void *data))
+{
+	while (*head != NULL) {
+		remove_list_item(NULL, head, free_data);
+	}
 }

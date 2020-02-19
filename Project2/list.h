@@ -16,5 +16,6 @@ int delete_list_item(list_t **head, void *find_data,
 		     list_t *(*find)(list_t **, list_t *, void *),
 		     void (*free_data)(void *data));
 void pop_list(list_t **head, void (*free_data)(void *data));
+void delete_list(list_t **head, void (*free_data)(void *data));
 
 #endif 

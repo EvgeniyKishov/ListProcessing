@@ -16,7 +16,7 @@ void free_node_data(node_t *node)
 	kfree(&node->r);
 }
 
-struct list *lfind_double(struct list **prev, struct list *head, void *val)
+list_t *lfind_double(list_t **prev, list_t *head, void *val)
 {
 	*prev = NULL;
 	while (head != NULL) {
@@ -28,7 +28,7 @@ struct list *lfind_double(struct list **prev, struct list *head, void *val)
 	return NULL;
 }
 
-struct list *find_item_by_id(struct list **prev, struct list *head, void *id)
+list_t *find_item_by_id(list_t **prev, list_t *head, void *id)
 {
 	*prev = NULL;
 	while (head != NULL) {
@@ -42,7 +42,7 @@ struct list *find_item_by_id(struct list **prev, struct list *head, void *id)
 
 int main()
 {
-	struct list *dlist = NULL;
+	list_t *dlist = NULL;
 	
 	//double *a = kcalloc(1, sizeof(double));
 	//*a = 2.5;
@@ -62,9 +62,9 @@ int main()
 	push_list(&node2, &dlist, false);
 
 	//double c = 2.5;
-	int id = 1;
-	delete_list_item(&dlist, &id, find_item_by_id, free_node_data);
-	//pop_list(&dlist, free_node_data);
+	//int id = 1;
+	//delete_list_item(&dlist, &id, find_item_by_id, free_node_data);
+	delete_list(&dlist, free_node_data);
 
 	printf("Hello world!\n");
 	return 0;
