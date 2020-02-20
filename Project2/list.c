@@ -66,6 +66,6 @@ void pop_list(struct list **head, void (*free_data)(void *data))
 void delete_list(struct list **head, void (*free_data)(void *data))
 {
 	while (*head != NULL) {
-		remove_list_item(NULL, head, free_data);
+		pop_list(head, free_data);
 	}
 }
