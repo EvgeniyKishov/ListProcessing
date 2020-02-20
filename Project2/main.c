@@ -16,7 +16,7 @@ void free_node_data(node_t *node)
 	kfree(&node->r);
 }
 
-list_t *lfind_double(list_t **prev, list_t *head, void *val)
+struct list *lfind_double(struct list **prev, struct list *head, void *val)
 {
 	*prev = NULL;
 	while (head != NULL) {
@@ -28,7 +28,7 @@ list_t *lfind_double(list_t **prev, list_t *head, void *val)
 	return NULL;
 }
 
-list_t *find_item_by_id(list_t **prev, list_t *head, void *id)
+struct list *find_item_by_id(struct list **prev, struct list *head, void *id)
 {
 	*prev = NULL;
 	while (head != NULL) {
@@ -42,7 +42,7 @@ list_t *find_item_by_id(list_t **prev, list_t *head, void *id)
 
 int main()
 {
-	list_t *dlist = NULL;
+	struct list *dlist = NULL;
 	
 	//double *a = kcalloc(1, sizeof(double));
 	//*a = 2.5;

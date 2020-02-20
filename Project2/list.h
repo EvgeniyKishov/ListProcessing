@@ -11,11 +11,11 @@ typedef struct list {
 	struct list *next;
 }list_t;
 
-void push_list(void *data, list_t **head, bool is_data_alloc);
-int delete_list_item(list_t **head, void *find_data,
-		     list_t *(*find)(list_t **, list_t *, void *),
-		     void (*free_data)(void *data));
-void pop_list(list_t **head, void (*free_data)(void *data));
-void delete_list(list_t **head, void (*free_data)(void *data));
+void push_list(void *data, struct list **head, bool is_data_alloc);
+int delete_list_item(struct list **head, void *find_data,
+		struct list *(*find)(struct list **, struct list *, void *),
+		void (*free_data)(void *data));
+void pop_list(struct list **head, void (*free_data)(void *data));
+void delete_list(struct list **head, void (*free_data)(void *data));
 
 #endif 
