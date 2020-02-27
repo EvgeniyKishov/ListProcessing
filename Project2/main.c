@@ -5,12 +5,12 @@
 #include "list.h"
 #include "mm.h"
 
-typedef struct node {
+struct node {
 	int id;
 	double *r;
-}node_t;
+};
 
-void free_node_data(node_t *node)
+void free_node_data(struct node *node)
 {
 	node->id = 0;
 	kfree(&node->r);
@@ -47,7 +47,7 @@ int main()
 	//double *a = kcalloc(1, sizeof(double));
 	//*a = 2.5;
 	//double a = 2.5;
-	node_t *node1 = kcalloc(1, sizeof(node_t));
+	struct node *node1 = kcalloc(1, sizeof(struct node));
 	node1->id = 1;
 	node1->r = kcalloc(2, sizeof(double));
 	node1->r[0] = 1.2; node1->r[1] = 1.5;
@@ -56,7 +56,7 @@ int main()
 	//double *b = kcalloc(1, sizeof(double));
 	//*b = 3.1;
 	//double b = 3.1;
-	node_t node2 = { .id = 2, .r = NULL };
+	struct node node2 = { .id = 2, .r = NULL };
 	node2.r = kcalloc(2, sizeof(double));
 	node2.r[0] = 2.3; node2.r[1] = 2.5;
 	push_list(&node2, &dlist, false);
