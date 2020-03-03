@@ -17,5 +17,4 @@ int delete_list_item(struct list **head, void *find_data,
 		void (*free_data)(void *data));
 void pop_list(struct list **head, void (*free_data)(void *data));
 void delete_list(struct list **head, void (*free_data)(void *data));
-
 #endif 
